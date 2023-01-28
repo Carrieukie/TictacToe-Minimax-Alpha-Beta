@@ -34,6 +34,7 @@ class TicTacToeViewModel : ViewModel() {
 
         )
 
+        // check the new game state if it has a winner
         val evaluateWinner = evaluateWinner(_ticTacToeState.value.field)
         val message = if (evaluateWinner == "X") "You win" else if (evaluateWinner == "O") " Ai wins" else "tie"
 
