@@ -80,7 +80,7 @@ fun Tabs(
                                     id = tabItem.icon
                                 ),
                                 colorFilter = ColorFilter.tint(
-                                    if (tabItem.playerName == "AI") Color(0xFF03A9F4) else MaterialTheme.colorScheme.primary
+                                    if (tabItem.playerName == "You") MaterialTheme.colorScheme.primary else if(tabItem.playerName == "AI") MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.outline
                                 ),
                                 contentDescription = null,
                                 modifier = Modifier
@@ -88,7 +88,7 @@ fun Tabs(
                             Text(
                                 modifier = Modifier
                                     .padding(12.dp),
-                                text = "3",
+                                text = "${if (index == 0) gameState.humanWins else if (index == 1) gameState.gamesTied else gameState.aiWins}",
                                 style = MaterialTheme.typography.titleSmall
                             )
                         }

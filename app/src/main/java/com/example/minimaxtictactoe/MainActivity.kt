@@ -44,7 +44,8 @@ class MainActivity : ComponentActivity() {
 
             MainScreen(
                 gameState = gameState,
-                updateBoard = viewModel::updateField
+                updateBoard = viewModel::updateField,
+                resetGame = viewModel::resetGame
             )
         }
     }

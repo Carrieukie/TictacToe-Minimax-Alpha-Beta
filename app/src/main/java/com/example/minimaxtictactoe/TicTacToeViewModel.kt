@@ -5,6 +5,8 @@ import com.example.minimaxtictactoe.models.Player
 import com.example.minimaxtictactoe.state.GameState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.random.Random
 
 class TicTacToeViewModel : ViewModel() {
@@ -29,16 +31,46 @@ class TicTacToeViewModel : ViewModel() {
         _ticTacToeState.value = _ticTacToeState.value.copy(
             field = currentField,
             num = Random.nextInt(1, 100),
+
         )
 
         val evaluateWinner = evaluateWinner(_ticTacToeState.value.field)
+        val message = if (evaluateWinner == "X") "You win" else if (evaluateWinner == "O") " Ai wins" else "tie"
+
         _ticTacToeState.value = _ticTacToeState.value.copy(
             winner = evaluateWinner,
-            message = if (evaluateWinner == "X") "You win" else if (evaluateWinner == "O") " Ai wins" else "tie"
+            message = message,
+            num = Random.nextInt(),
+            aiWins = incrementAiWinCount(_ticTacToeState.value,evaluateWinner),
+            humanWins = incrementHumanWinsCount(_ticTacToeState.value,evaluateWinner),
+            gamesTied = incrementGamesTied(_ticTacToeState.value,evaluateWinner)
         )
 
         if (player is Player.Human) {
             nextTurn(_ticTacToeState.value)
+        }
+    }
+
+    private fun incrementGamesTied(gameState: GameState,evaluateWinner: String?): Int {
+        return if (evaluateWinner == "tie"){
+            gameState.gamesTied + 1
+        } else {
+            gameState.gamesTied
+        }
+    }
+
+    private fun incrementHumanWinsCount(gameState: GameState,evaluateWinner: String?): Int {
+        return if (evaluateWinner == "X"){
+            gameState.humanWins + 1
+        } else {
+            gameState.humanWins
+        }
+    }
+    private fun incrementAiWinCount(gameState: GameState,evaluateWinner: String?): Int {
+        return if (evaluateWinner == "O"){
+            gameState.aiWins + 1
+        } else {
+            gameState.aiWins
         }
     }
 
@@ -63,6 +95,15 @@ class TicTacToeViewModel : ViewModel() {
         updateField(bestMove.second, bestMove.first, Player.AI)
     }
 
+    fun resetGame() {
+        _ticTacToeState.value = _ticTacToeState.value.copy(
+            field = GameState.emptyField(),
+            round = _ticTacToeState.value.round + 1,
+            winner = null,
+            num = Random.nextInt()
+        )
+    }
+
     private fun minimax(board: Array<Array<Char?>>, depth: Int, isMaximizing: Boolean): Int {
         val evaluateWinner = evaluateWinner(board)
         if (evaluateWinner != null) {
@@ -78,14 +119,12 @@ class TicTacToeViewModel : ViewModel() {
                         board[i][j] = Player.AI.character
                         val score = minimax(board, depth + 1, false)
                         board[i][j] = null
-                        if (score > bestScore) {
-                            bestScore = score
-                        }
+                        bestScore = max(score, bestScore)
                     }
                 }
             }
             return bestScore
-        }else{
+        } else {
             var bestScore = Int.MAX_VALUE
             for (i in board.indices) {
                 for (j in 0 until board[0].size) {
@@ -93,9 +132,7 @@ class TicTacToeViewModel : ViewModel() {
                         board[i][j] = Player.Human.character
                         val score = minimax(board, depth + 1, true)
                         board[i][j] = null
-                        if (score < bestScore) {
-                            bestScore = score
-                        }
+                        bestScore = min(score, bestScore)
                     }
                 }
             }

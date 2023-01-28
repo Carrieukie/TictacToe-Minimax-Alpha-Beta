@@ -23,7 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -50,7 +49,7 @@ fun TicTacToeBoard(
         }
 
         for ((row, pointTypeRow) in board.withIndex()) {
-            for ((col, pointType) in pointTypeRow.withIndex()) {
+            for ((col, pointChar) in pointTypeRow.withIndex()) {
                 val endPadding = remember {
                     when {
                         col != 0 -> dividerWidth
@@ -74,13 +73,13 @@ fun TicTacToeBoard(
                         )
                         .size(tileSize)
                         .clickable {
-                            if (pointType == null) {
+                            if (pointChar == null) {
                                 onClick(row, col)
                             }
                         }
                 ) {
                     AnimatedVisibility(
-                        visible = pointType != null,
+                        visible = pointChar != null,
                         enter = scaleIn(
                             animationSpec = tween(400)
                         ),
@@ -91,8 +90,8 @@ fun TicTacToeBoard(
                             .padding(8.dp)
                             .matchParentSize()
                     ) {
-                        PointTypeImage(
-                            pointType = pointType
+                        PlayerImage(
+                            playerChar = pointChar
                         )
                     }
                 }
@@ -108,9 +107,9 @@ fun TicTacToeBoard(
             }
 
             BoardDivider(
-                maxHeight = maxHeight,
-                dividerThickness = { dividerWidth },
-                offsetVert = {
+                maximumHeight = maxHeight,
+                lineWidth = { dividerWidth },
+                verticalOffset = {
                     IntOffset(
                         x = (tileSize * (i + 1) + padding)
                             .toPx()
@@ -120,7 +119,7 @@ fun TicTacToeBoard(
                             .toInt()
                     )
                 },
-                offsetHorz = {
+                horizontalOffset = {
                     IntOffset(
                         x = 0.dp
                             .toPx()
@@ -137,48 +136,48 @@ fun TicTacToeBoard(
 
 @Composable
 private fun BoardDivider(
-    maxHeight: Dp,
-    dividerThickness: () -> Dp,
-    offsetHorz: Density.() -> IntOffset,
-    offsetVert: Density.() -> IntOffset
+    maximumHeight: Dp,
+    lineWidth: () -> Dp,
+    horizontalOffset: Density.() -> IntOffset,
+    verticalOffset: Density.() -> IntOffset
 ) {
 
     Divider(
-        thickness = dividerThickness(),
+        thickness = lineWidth(),
         modifier = Modifier
             .offset {
-                offsetVert()
+                verticalOffset()
             }
-            .size(dividerThickness(), maxHeight)
+            .size(lineWidth(), maximumHeight)
             .clip(CircleShape)
     )
 
     Divider(
-        thickness = dividerThickness(),
+        thickness = lineWidth(),
         modifier = Modifier
             .offset {
-                offsetHorz()
+                horizontalOffset()
             }
             .fillMaxWidth()
-            .height(dividerThickness())
+            .height(lineWidth())
             .clip(CircleShape)
     )
 }
 
 @Composable
-private fun BoxScope.PointTypeImage(
-    pointType: Char?
+private fun BoxScope.PlayerImage(
+    playerChar: Char?
 ) {
     Image(
         painter = painterResource(
-            id = when (pointType) {
+            id = when (playerChar) {
                 'X' -> R.drawable.ic_tic_tac_toe_x
                 'O' -> R.drawable.ic_tic_tac_toe_o
                 else -> R.drawable.transparent
             }
         ),
         colorFilter = ColorFilter.tint(
-            if (pointType == 'O') MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
+            if (playerChar == 'X') MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
         ),
         contentDescription = null,
         modifier = Modifier
