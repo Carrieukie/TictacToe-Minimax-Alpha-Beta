@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.minimaxtictactoe.models.TabItem
 import com.example.minimaxtictactoe.state.GameState
@@ -73,7 +74,8 @@ fun Tabs(
                                 modifier = Modifier
                                     .padding(12.dp),
                                 text = tabItem.playerName,
-                                style = MaterialTheme.typography.titleSmall
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold
                             )
                             Image(
                                 painter = painterResource(
@@ -89,7 +91,8 @@ fun Tabs(
                                 modifier = Modifier
                                     .padding(12.dp),
                                 text = "${if (index == 0) gameState.humanWins else if (index == 1) gameState.gamesTied else gameState.aiWins}",
-                                style = MaterialTheme.typography.titleSmall
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold
                             )
                         }
                     }

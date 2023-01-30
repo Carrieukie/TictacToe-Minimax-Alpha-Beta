@@ -1,6 +1,9 @@
 package com.example.minimaxtictactoe.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -53,7 +56,7 @@ fun MainScreen(
     updateBoard: (row: Int, col: Int, player: Player) -> Unit,
     resetGame: () -> Unit
 ) {
-    val drawerState = rememberDrawerState(DrawerValue.Open)
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
     val items = listOf(Icons.Default.Favorite, Icons.Default.Face, Icons.Default.Email)
     val coroutineScope = rememberCoroutineScope()
     val selectedItem = remember { mutableStateOf(items[0]) }
@@ -80,16 +83,38 @@ fun MainScreen(
                 ) {
                     Column(
                         modifier = Modifier
+                            .fillMaxSize()
                             .padding(16.dp),
                         verticalArrangement = Arrangement.SpaceEvenly,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
 
-                        Text(
-                            text = "Round ${gameState.round}",
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold
-                        )
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .animateContentSize(
+                                    animationSpec = spring(
+                                        dampingRatio = Spring.DampingRatioLowBouncy,
+                                        stiffness = Spring.StiffnessLow
+                                    )
+                                ),
+                            verticalArrangement = Arrangement.SpaceEvenly,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "Round ${gameState.round}",
+                                style = MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            if (gameState.message != null) {
+                                Text(
+                                    modifier = Modifier
+                                        .padding(4.dp),
+                                    text = gameState.message.toString()
+                                )
+                            }
+                        }
 
                         Tabs(
                             gameState,

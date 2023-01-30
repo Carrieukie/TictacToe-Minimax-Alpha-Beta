@@ -36,7 +36,7 @@ class TicTacToeViewModel : ViewModel() {
 
         // check the new game state if it has a winner
         val evaluateWinner = evaluateWinner(_ticTacToeState.value.field)
-        val message = if (evaluateWinner == "X") "You win" else if (evaluateWinner == "O") " Ai wins" else "tie"
+        val message = if (evaluateWinner == "X") "You win" else if (evaluateWinner == "O") " Ai wins" else if (evaluateWinner == "tie") "tie" else null
 
         _ticTacToeState.value = _ticTacToeState.value.copy(
             winner = evaluateWinner,
@@ -101,7 +101,8 @@ class TicTacToeViewModel : ViewModel() {
             field = GameState.emptyField(),
             round = _ticTacToeState.value.round + 1,
             winner = null,
-            num = Random.nextInt()
+            num = Random.nextInt(),
+            message = null
         )
     }
 
