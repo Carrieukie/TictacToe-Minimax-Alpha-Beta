@@ -87,12 +87,11 @@ fun Tabs(
                                 contentDescription = null,
                                 modifier = Modifier
                             )
-                            Text(
+                            AnimatedCounter(
                                 modifier = Modifier
                                     .padding(12.dp),
-                                text = "${if (index == 0) gameState.humanWins else if (index == 1) gameState.gamesTied else gameState.aiWins}",
+                                count = if (index == 0) gameState.humanWins else if (index == 1) gameState.gamesTied else gameState.aiWins,
                                 style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold
                             )
                         }
                     }

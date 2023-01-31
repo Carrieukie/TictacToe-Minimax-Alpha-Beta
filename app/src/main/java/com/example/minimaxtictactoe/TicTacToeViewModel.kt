@@ -1,15 +1,21 @@
 package com.example.minimaxtictactoe
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.minimaxtictactoe.models.Player
+import com.example.minimaxtictactoe.persistence.UserPreferencesRepository
 import com.example.minimaxtictactoe.state.GameState
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
 
-class TicTacToeViewModel : ViewModel() {
+class TicTacToeViewModel(
+    private val userPreferencesRepository: UserPreferencesRepository
+) : ViewModel() {
 
     private val _ticTacToeState = MutableStateFlow(GameState())
     val ticTacToeState: StateFlow<GameState> = _ticTacToeState
@@ -32,19 +38,20 @@ class TicTacToeViewModel : ViewModel() {
             field = currentField,
             num = Random.nextInt(1, 100),
 
-        )
+            )
 
         // check the new game state if it has a winner
         val evaluateWinner = evaluateWinner(_ticTacToeState.value.field)
-        val message = if (evaluateWinner == "X") "You win" else if (evaluateWinner == "O") " Ai wins" else if (evaluateWinner == "tie") "tie" else null
+        val message =
+            if (evaluateWinner == "X") "You win" else if (evaluateWinner == "O") " Ai wins" else if (evaluateWinner == "tie") "tie" else null
 
         _ticTacToeState.value = _ticTacToeState.value.copy(
             winner = evaluateWinner,
             message = message,
             num = Random.nextInt(),
-            aiWins = incrementAiWinCount(_ticTacToeState.value,evaluateWinner),
-            humanWins = incrementHumanWinsCount(_ticTacToeState.value,evaluateWinner),
-            gamesTied = incrementGamesTied(_ticTacToeState.value,evaluateWinner)
+            aiWins = incrementAiWinCount(_ticTacToeState.value, evaluateWinner),
+            humanWins = incrementHumanWinsCount(_ticTacToeState.value, evaluateWinner),
+            gamesTied = incrementGamesTied(_ticTacToeState.value, evaluateWinner)
         )
 
         if (player is Player.Human) {
@@ -52,23 +59,24 @@ class TicTacToeViewModel : ViewModel() {
         }
     }
 
-    private fun incrementGamesTied(gameState: GameState,evaluateWinner: String?): Int {
-        return if (evaluateWinner == "tie"){
+    private fun incrementGamesTied(gameState: GameState, evaluateWinner: String?): Int {
+        return if (evaluateWinner == "tie") {
             gameState.gamesTied + 1
         } else {
             gameState.gamesTied
         }
     }
 
-    private fun incrementHumanWinsCount(gameState: GameState,evaluateWinner: String?): Int {
-        return if (evaluateWinner == "X"){
+    private fun incrementHumanWinsCount(gameState: GameState, evaluateWinner: String?): Int {
+        return if (evaluateWinner == "X") {
             gameState.humanWins + 1
         } else {
             gameState.humanWins
         }
     }
-    private fun incrementAiWinCount(gameState: GameState,evaluateWinner: String?): Int {
-        return if (evaluateWinner == "O"){
+
+    private fun incrementAiWinCount(gameState: GameState, evaluateWinner: String?): Int {
+        return if (evaluateWinner == "O") {
             gameState.aiWins + 1
         } else {
             gameState.aiWins
@@ -193,5 +201,12 @@ class TicTacToeViewModel : ViewModel() {
         "O" to 1,
         "tie" to 0
     )
+
+    val themeStream: Flow<Int> get() = userPreferencesRepository.getTheme
+    fun setTheme(themeValue: Int) {
+        viewModelScope.launch {
+            userPreferencesRepository.saveTheme(themeValue = themeValue)
+        }
+    }
 
 }

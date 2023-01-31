@@ -13,17 +13,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
+import com.example.minimaxtictactoe.models.ThemeWrapper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
 fun DrawerContent(
-    items: List<ImageVector>,
-    selectedItem: MutableState<ImageVector>,
+    items: List<ThemeWrapper>,
+    selectedItem: MutableState<ThemeWrapper>,
     coroutineScope: CoroutineScope,
-    drawerState: DrawerState
+    drawerState: DrawerState,
+    setTheme: (Int) -> Unit
 ) {
     ModalDrawerSheet(
         Modifier
@@ -32,12 +34,18 @@ fun DrawerContent(
         Spacer(Modifier.height(12.dp))
         items.forEach { item ->
             NavigationDrawerItem(
-                icon = { Icon(item, contentDescription = null) },
-                label = { Text(item.name) },
+                icon = {
+                    Icon(
+                        painter = rememberVectorPainter(image = item.themeIcon),
+                        contentDescription = null
+                    )
+                },
+                label = { Text(item.themeName) },
                 selected = item == selectedItem.value,
                 onClick = {
                     coroutineScope.launch { drawerState.close() }
                     selectedItem.value = item
+                    setTheme(item.themeValue.themeValue)
                 },
                 modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
             )
