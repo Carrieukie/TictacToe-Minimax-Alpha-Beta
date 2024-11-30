@@ -76,8 +76,8 @@ fun MainScreen(
         ThemeWrapper.LightMode("Light Mode", icon = Icons.Default.ModeNight, themeValu = Theme.LIGHT_THEME),
         ThemeWrapper.DarkMode("Dark Mode", icon = Icons.Default.LightMode, themeValu = Theme.DARK_THEME),
         ThemeWrapper.MaterialYou("Material You", icon = Icons.Default.Mode, themeValu = Theme.MATERIAL_YOU),
-
         )
+
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
     val selectedItem = remember { mutableStateOf(items[0]) }

@@ -12,8 +12,6 @@ import com.example.minimaxtictactoe.ui.theme.Theme
 import kotlinx.coroutines.Dispatchers
 
 class MainActivity : ComponentActivity() {
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,6 +24,7 @@ class MainActivity : ComponentActivity() {
                 initial = Theme.FOLLOW_SYSTEM.themeValue,
                 context = Dispatchers.Main.immediate
             ).value
+
             MainScreen(
                 theme = theme,
                 gameState = gameState,
