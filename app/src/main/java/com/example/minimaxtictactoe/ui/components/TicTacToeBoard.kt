@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -33,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.example.minimaxtictactoe.R
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun TicTacToeBoard(
     board: Array<Array<Char?>>,
@@ -152,16 +152,14 @@ private fun BoardDivider(
             .clip(CircleShape)
     )
 
-    Divider(
-        thickness = lineWidth(),
-        modifier = Modifier
-            .offset {
-                horizontalOffset()
-            }
-            .fillMaxWidth()
-            .height(lineWidth())
-            .clip(CircleShape)
-    )
+    HorizontalDivider(modifier = Modifier
+        .offset {
+            horizontalOffset()
+        }
+        .fillMaxWidth()
+        .height(lineWidth())
+        .clip(CircleShape),
+        thickness = lineWidth())
 }
 
 @Composable
@@ -187,7 +185,7 @@ private fun BoxScope.PlayerImage(
 
 @Preview
 @Composable
-fun previewBoard() {
+fun PreviewBoard() {
     TicTacToeBoard(
         board = board,
         onClick = { row, col -> },

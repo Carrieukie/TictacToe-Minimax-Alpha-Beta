@@ -14,16 +14,16 @@ import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.minimaxtictactoe.models.TabItem
-import com.example.minimaxtictactoe.state.GameState
+import com.example.minimaxtictactoe.ui.mainscreencontent.model.TabItem
+import com.example.minimaxtictactoe.ui.mainscreencontent.model.GameState
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import kotlinx.coroutines.launch
@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun Tabs(
-    gameState: GameState,
+    gameState: State<GameState>,
     tabs: List<TabItem>,
     pagerState: PagerState,
     onClick: (Int) -> Unit
@@ -90,7 +90,7 @@ fun Tabs(
                             AnimatedCounter(
                                 modifier = Modifier
                                     .padding(12.dp),
-                                count = if (index == 0) gameState.humanWins else if (index == 1) gameState.gamesTied else gameState.aiWins,
+                                count = if (index == 0) gameState.value.humanWins else if (index == 1) gameState.value.gamesTied else gameState.value.aiWins,
                                 style = MaterialTheme.typography.titleMedium,
                             )
                         }
