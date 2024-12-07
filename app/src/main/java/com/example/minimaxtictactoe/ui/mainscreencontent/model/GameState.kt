@@ -1,6 +1,4 @@
-package com.example.minimaxtictactoe.state
-
-import com.example.minimaxtictactoe.models.Player
+package com.example.minimaxtictactoe.ui.mainscreencontent.model
 
 data class GameState(
     val field: Array<Array<Char?>> = emptyField(),

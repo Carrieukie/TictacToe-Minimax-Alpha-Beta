@@ -1,4 +1,4 @@
-package com.example.minimaxtictactoe.models
+package com.example.minimaxtictactoe.ui.mainscreencontent.model
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.minimaxtictactoe.ui.theme.Theme

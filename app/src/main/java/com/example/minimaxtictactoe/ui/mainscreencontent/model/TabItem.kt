@@ -1,4 +1,4 @@
-package com.example.minimaxtictactoe.models
+package com.example.minimaxtictactoe.ui.mainscreencontent.model
 
 sealed class TabItem(
     val icon: Int,
