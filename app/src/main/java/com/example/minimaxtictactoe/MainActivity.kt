@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val gameState = viewModel.ticTacToeState.collectAsState(GameState())
             val theme = viewModel.themeStream.collectAsState(
-                initial = Theme.FOLLOW_SYSTEM.themeValue,
+                initial = Theme.MATERIAL_YOU.themeValue,
                 context = Dispatchers.Main.immediate
             ).value
             val drawerState = rememberDrawerState(DrawerValue.Closed)
