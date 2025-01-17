@@ -1,6 +1,6 @@
 package com.example.minimaxtictactoe.ui.mainscreencontent.model
 
-import impl_two.Board
+import com.example.minimaxtictactoe.mcts.Board
 
 
 data class GameState(

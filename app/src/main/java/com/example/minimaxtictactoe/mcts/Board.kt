@@ -1,6 +1,4 @@
-package impl_two
-
-import com.example.minimaxtictactoe.mcts.Node
+package com.example.minimaxtictactoe.mcts
 
 data class Board(
     val prevBoard: Board? = null,

@@ -1,4 +1,4 @@
-import impl_two.Board
+import com.example.minimaxtictactoe.mcts.Board
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

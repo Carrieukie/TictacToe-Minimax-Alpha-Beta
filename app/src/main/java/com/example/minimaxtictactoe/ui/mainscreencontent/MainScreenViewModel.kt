@@ -7,10 +7,9 @@ import com.example.minimaxtictactoe.mcts.MCTS
 import com.example.minimaxtictactoe.persistence.UserPreferencesRepository
 import com.example.minimaxtictactoe.ui.mainscreencontent.model.GameState
 import com.example.minimaxtictactoe.ui.mainscreencontent.model.TicTacToeEvent
-import impl_two.Board
+import com.example.minimaxtictactoe.mcts.Board
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
