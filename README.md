@@ -1,14 +1,13 @@
 
-# TicTacToe-Minimax-Alpha-Beta
+# TicTacToe-AI-MCTS-Minimax
 
 **Work in Progress**
 
 ## Overview
 
-TicTacToe-Minimax-Alpha-Beta is an advanced implementation of the classic Tic Tac Toe game, leveraging the **Minimax algorithm** with **Alpha-Beta pruning** for efficient decision-making. This project showcases AI capabilities in determining the optimal move, offering a challenging opponent for players.
+TicTacToe-AI-MCTS-Minimax is an advanced implementation of the classic Tic Tac Toe game, showcasing the power of AI through the Monte Carlo Tree Search (MCTS) and Minimax algorithm with Alpha-Beta pruning. This project demonstrates efficient decision-making and strategic gameplay, offering a formidable AI opponent.
 
-The project is built for Android using Jetpack Compose, providing a modern, declarative UI framework. This ensures a smooth and interactive gaming experience.
-
+The project is built for Android using Jetpack Compose, ensuring a modern, declarative UI framework for a smooth and interactive gaming experience.
 ## Algorithms
 
 ### Minimax with Alpha-Beta Pruning
@@ -18,6 +17,17 @@ The AI evaluates all possible moves to determine the best outcome, pruning unnec
 -   **Minimax:** Explores all possible game states to choose the optimal move.
 
 -   **Alpha-Beta Pruning:** Reduces the number of nodes evaluated in the Minimax tree, enhancing performance.
+
+### Monte Carlo Tree Search (MCTS)
+MCTS is a probabilistic search algorithm that combines random sampling with a strategic tree-building process. It balances exploration and exploitation to find optimal moves without requiring exhaustive exploration of the game tree.
+
+-   **Selection**: Navigate the tree to choose the most promising node.
+
+-   **Expansion**: Add new child nodes to the tree.
+
+-   **Simulation**: Perform random simulations to evaluate potential outcomes.
+
+-   **Backpropagation**: Update the tree with the simulation results to improve decision-making.
 
 ## Images
 
