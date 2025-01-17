@@ -8,6 +8,13 @@
 TicTacToe-AI-MCTS-Minimax is an advanced implementation of the classic Tic Tac Toe game, showcasing the power of AI through the Monte Carlo Tree Search (MCTS) and Minimax algorithm with Alpha-Beta pruning. This project demonstrates efficient decision-making and strategic gameplay, offering a formidable AI opponent.
 
 The project is built for Android using Jetpack Compose, ensuring a modern, declarative UI framework for a smooth and interactive gaming experience.
+
+## Branches
+
+-   The **Minimax** implementation can be found in the `minimax` branch.
+    
+-   The **MCTS** implementation can be found in the `mcts` branch.
+
 ## Algorithms
 
 ### Minimax with Alpha-Beta Pruning
