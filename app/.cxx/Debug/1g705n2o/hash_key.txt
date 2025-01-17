@@ -7,7 +7,7 @@
 #   - $HASH is the hash value computed from this text.
 #   - $CMAKE is the path to CMake 3.22.1.
 #   - $NINJA is the path to Ninja.
--H$PROJECT/app/src/main/cpp
+-H$PROJECT/app/src/com.example.minimaxtictactoe.mcts.main/cpp
 -DCMAKE_SYSTEM_NAME=Android
 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 -DCMAKE_SYSTEM_VERSION=24

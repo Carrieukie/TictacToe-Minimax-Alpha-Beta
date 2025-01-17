@@ -1,6 +1,7 @@
 package com.example.minimaxtictactoe
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.DrawerValue
@@ -42,6 +43,10 @@ class MainActivity : ComponentActivity() {
                             drawerState.close()
                         } else {
                             drawerState.open()
+                        }
+
+                        is TicTacToeEvent.ShowToast -> {
+                            Toast.makeText(this@MainActivity, event.message, Toast.LENGTH_SHORT).show()
                         }
 
                         else -> {}

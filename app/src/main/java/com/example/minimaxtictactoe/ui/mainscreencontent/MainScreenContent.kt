@@ -41,7 +41,6 @@ import com.example.minimaxtictactoe.ui.components.AnimatedCounter
 import com.example.minimaxtictactoe.ui.components.Tabs
 import com.example.minimaxtictactoe.ui.components.TicTacToeBoard
 import com.example.minimaxtictactoe.ui.mainscreencontent.model.GameState
-import com.example.minimaxtictactoe.ui.mainscreencontent.model.Player
 import com.example.minimaxtictactoe.ui.mainscreencontent.model.TicTacToeEvent
 
 @Composable
@@ -103,9 +102,9 @@ fun MainScreenContent(
                 )
 
                 TicTacToeBoard(
-                    board = gameState.value.field,
+                    board = gameState.value.board.toBoardArray(),
                     onClick = { row, col ->
-                        onEvent(TicTacToeEvent.UpdateField(col, row, Player.Human))
+                        onEvent(TicTacToeEvent.UpdateField(col, row))
                     },
                     modifier = Modifier
                         .fillMaxWidth()

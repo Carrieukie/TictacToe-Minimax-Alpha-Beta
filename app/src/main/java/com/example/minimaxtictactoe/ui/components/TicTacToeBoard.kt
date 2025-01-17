@@ -36,7 +36,7 @@ import com.example.minimaxtictactoe.R
 
 @Composable
 fun TicTacToeBoard(
-    board: Array<Array<Char?>>,
+    board: Array<Array<String?>>,
     modifier: Modifier = Modifier,
     onClick: (row: Int, col: Int) -> Unit
 ) {
@@ -164,18 +164,18 @@ private fun BoardDivider(
 
 @Composable
 private fun BoxScope.PlayerImage(
-    playerChar: Char?
+    playerChar: String?
 ) {
     Image(
         painter = painterResource(
             id = when (playerChar) {
-                'X' -> R.drawable.ic_tic_tac_toe_x
-                'O' -> R.drawable.ic_tic_tac_toe_o
+                "x" -> R.drawable.ic_tic_tac_toe_x
+                "o" -> R.drawable.ic_tic_tac_toe_o
                 else -> R.drawable.transparent
             }
         ),
         colorFilter = ColorFilter.tint(
-            if (playerChar == 'X') MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
+            if (playerChar == "x") MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
         ),
         contentDescription = null,
         modifier = Modifier
@@ -195,8 +195,8 @@ fun PreviewBoard() {
     )
 }
 
-val board: Array<Array<Char?>> = arrayOf(
-    arrayOf('X', null, null),
-    arrayOf(null, 'O', null),
-    arrayOf('O', null, null),
+val board: Array<Array<String?>> = arrayOf(
+    arrayOf("x", null, null),
+    arrayOf(null, "o", null),
+    arrayOf("x", null, null),
 )
