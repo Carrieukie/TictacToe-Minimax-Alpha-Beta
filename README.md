@@ -25,17 +25,6 @@ The AI evaluates all possible moves to determine the best outcome, pruning unnec
 
 -   **Alpha-Beta Pruning:** Reduces the number of nodes evaluated in the Minimax tree, enhancing performance.
 
-### Monte Carlo Tree Search (MCTS)
-MCTS is a probabilistic search algorithm that combines random sampling with a strategic tree-building process. It balances exploration and exploitation to find optimal moves without requiring exhaustive exploration of the game tree.
-
--   **Selection**: Navigate the tree to choose the most promising node.
-
--   **Expansion**: Add new child nodes to the tree.
-
--   **Simulation**: Perform random simulations to evaluate potential outcomes.
-
--   **Backpropagation**: Update the tree with the simulation results to improve decision-making.
-
 ## Images
 
 ## Screenshots
