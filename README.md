@@ -1,5 +1,5 @@
 
-# TicTacToe-AI-MCTS-Minimax
+# Solving TicTacToe using Monte Carlo Tree Search or Minimax optimized with alpha beta pruning
 
 **Work in Progress**
 
