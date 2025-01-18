@@ -13,15 +13,7 @@ The project is built for Android using Jetpack Compose, ensuring a modern, decla
 -   The **Minimax** implementation can be found in the `minimax` branch.
     
 -   The **MCTS** implementation can be found in the `mcts` branch.
-## Algorithms
-
-### Minimax with Alpha-Beta Pruning
-
-The AI evaluates all possible moves to determine the best outcome, pruning unnecessary branches to improve efficiency.
-
--   **Minimax:** Explores all possible game states to choose the optimal move.
-
--   **Alpha-Beta Pruning:** Reduces the number of nodes evaluated in the Minimax tree, enhancing performance.
+## Algorithm
 
 ### Monte Carlo Tree Search (MCTS)
 MCTS is a probabilistic search algorithm that combines random sampling with a strategic tree-building process. It balances exploration and exploitation to find optimal moves without requiring exhaustive exploration of the game tree.
